@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using EmployeeTaskSystem.Data.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeTaskSystem.Data
@@ -8,6 +9,21 @@ namespace EmployeeTaskSystem.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+        }
+
+        public DbSet<Models.Task> Tasks { get; init; }
+
+        public DbSet<Employee> Employees { get; init; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Models.Task>()
+                .HasOne(t => t.Employee)
+                .WithMany(e => e.Tasks)
+                .HasForeignKey(t => t.EmployeeId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            base.OnModelCreating(builder);
         }
     }
 }
