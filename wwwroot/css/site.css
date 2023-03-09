@@ -16,3 +16,10 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+    margin-top: 10px;
+}

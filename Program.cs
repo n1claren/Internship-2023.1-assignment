@@ -1,4 +1,6 @@
 using EmployeeTaskSystem.Data;
+using EmployeeTaskSystem.Infrastructure;
+using EmployeeTaskSystem.Services.Employees;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +19,12 @@ builder.Services
 
 builder.Services.AddControllersWithViews();
 
+builder.Services
+    .AddTransient<IEmployeeService, EmployeeService>();
+
 var app = builder.Build();
+
+app.MigrateDatabase();
 
 if (app.Environment.IsDevelopment())
 {
