@@ -33,5 +33,26 @@ namespace EmployeeTaskSystem.Services.Tasks
                        FullName = e.FullName
                    })
                    .ToList();
+
+        public ListTasksViewModel ListAllTasks()
+        {
+            var tasks = this.data
+                            .Tasks
+                            .OrderBy(t => t.Id)
+                            .Select(t => new TaskDTO
+                            {
+                                Id = t.Id,
+                                Title = t.Title,
+                                Description = t.Description,
+                                EmployeeName = t.Employee.FullName,
+                                DueDate = t.DueDate
+                            })
+                            .ToList();
+
+            return new ListTasksViewModel
+            {
+                Tasks = tasks
+            };
+        }
     }
 }

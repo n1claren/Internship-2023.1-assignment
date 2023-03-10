@@ -1,0 +1,34 @@
+﻿@if (Model.Tasks.Count == 0)
+{
+    <h1 class="display-4">There are no tasks in the system.</h1>
+}
+else
+{
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Task Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Employee</th>
+                <th scope="col">Due Date</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var task in Model.Tasks)
+            {
+                <tr>
+                    <td scope="col">@task.Title</td>
+                    <td scope="col">@task.Description</td>
+                    <td scope="col">@task.EmployeeName</td>
+                    <td scope="col">@task.DueDate.ToString("dddd, dd MMMM yyyy")</td>
+                    <td scope="col"><a asp-controller="Taks" asp-action="MarkComplete" asp-route-id="@task.Id" class="btn btn-primary">Complete</a></td>
+                    <td scope="col"><a asp-controller="Taks" asp-action="Edit" asp-route-id="@task.Id" class="btn btn-warning">Edit</a></td>
+                    <td scope="col"><a asp-controller="Taks" asp-action="Delete" asp-route-id="@task.Id" class="btn btn-danger">Delete</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
