@@ -12,6 +12,7 @@ else
                 <th scope="col">Phone Number</th>
                 <th scope="col">Date Of Birth</th>
                 <th scope="col">Salary</th>
+                <th scope="col">Details</th>
             </tr>
         </thead>
         <tbody>
@@ -23,6 +24,7 @@ else
                     <td scope="col">@employee.PhoneNumber</td>
                     <td scope="col">@employee.DateOfBirth.ToString("dddd, dd MMMM yyyy")</td>
                     <td scope="col">@employee.Salary</td>
+                    <td scope="col"><a asp-controller="Employees" asp-action="Details" asp-route-id="@employee.Id" class="btn btn-primary">Details</a></td>
                 </tr>
             }
         </tbody>

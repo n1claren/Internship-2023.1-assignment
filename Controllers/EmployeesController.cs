@@ -41,5 +41,12 @@ namespace EmployeeTaskSystem.Controllers
 
             return View(employees);
         }
+
+        public IActionResult Details(int id)
+        {
+            var employee = this.eService.GetEmployeeDetails(id);
+
+            return View(employee);
+        }
     }
 }

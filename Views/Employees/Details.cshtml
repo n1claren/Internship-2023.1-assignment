@@ -1,0 +1,22 @@
+﻿@model EmployeeDTO
+
+<div class="container">
+    <div class="row">
+        <div class="offset-md-3 col-md-6 col-sm-12">
+            <h2 class="heading-margin">Employee Details</h2>
+            <div class="card" style="width: 18rem;">
+                <div class="card-header">
+                    @Model.FullName
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Phone: @Model.PhoneNumber</li>
+                    <li class="list-group-item">Email: @Model.Email</li>
+                    <li class="list-group-item">Birthday: @Model.DateOfBirth.ToString("dddd, dd MMMM yyyy")</li>
+                    <li class="list-group-item">Salary: @Model.Salary</li>
+                    <li class="list-group-item"><a asp-controller="Employees" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a></li>
+                    <li class="list-group-item"><a asp-controller="Employees" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

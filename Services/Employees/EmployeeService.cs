@@ -28,13 +28,9 @@ namespace EmployeeTaskSystem.Services.Employees
 
         public bool EmployeeExists(string email, string phoneNumber)
         {
-            bool emailExists = this.data
-                                   .Employees
-                                   .Any(e => e.Email == email);
+            bool emailExists = this.data.Employees.Any(e => e.Email == email);
 
-            bool phoneNumberExists = this.data
-                                         .Employees
-                                         .Any (e => e.PhoneNumber == phoneNumber);
+            bool phoneNumberExists = this.data.Employees.Any (e => e.PhoneNumber == phoneNumber);
 
             if (emailExists || phoneNumberExists )
             {
@@ -46,6 +42,25 @@ namespace EmployeeTaskSystem.Services.Employees
             }
         }
 
+        public EmployeeDTO GetEmployeeDetails(int id)
+        {
+            var employee = this.data
+                               .Employees
+                               .Where(e => e.Id == id)
+                               .Select(e => new  EmployeeDTO
+                               {
+                                   Id = e.Id,
+                                   FullName = e.FullName,
+                                   Email = e.Email,
+                                   PhoneNumber = e.PhoneNumber,
+                                   DateOfBirth = e.DateOfBirth,
+                                   Salary = e.Salary
+                               })
+                               .FirstOrDefault();
+
+            return employee;
+        }
+
         public ListEmployeesViewModel ListEmployees()
         {
             var employees = this.data
@@ -53,6 +68,7 @@ namespace EmployeeTaskSystem.Services.Employees
                                 .OrderBy (e => e.Id)
                                 .Select (e => new EmployeeDTO
                                 {
+                                    Id = e.Id,
                                     FullName = e.FullName,
                                     Email = e.Email,
                                     PhoneNumber = e.PhoneNumber,

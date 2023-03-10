@@ -9,5 +9,7 @@ namespace EmployeeTaskSystem.Services.Employees
         public bool EmployeeExists(string email, string phoneNumber);
 
         public ListEmployeesViewModel ListEmployees();
+
+        public EmployeeDTO GetEmployeeDetails(int id);
     }
 }
