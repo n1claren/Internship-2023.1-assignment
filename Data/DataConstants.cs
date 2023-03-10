@@ -9,5 +9,7 @@
         public const int PhoneNumberMaxLength = 20;
 
         public const string DecimalColumn = "decimal(18, 2)";
+
+        public const int TaskTitleMaxLength = 50;
     }
 }

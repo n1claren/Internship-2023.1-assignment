@@ -7,14 +7,14 @@ namespace EmployeeTaskSystem.Models.Employees
     public class AddEmployeeFormModel
     {
         [Display(Name = "Full Name")]
-        [StringLength(TextMaxLength, MinimumLength = TextMinLength, ErrorMessage = "Employee Full Name should be between {2} and {1}!")]
+        [StringLength(TextMaxLength, MinimumLength = TextMinLength, ErrorMessage = "Employee Full Name should be between {2} and {1} symbols!")]
         public string FullName { get; init; }
 
-        [StringLength(TextMaxLength, MinimumLength = TextMinLength, ErrorMessage = "Employee Email should be between {2} and {1}!")]
+        [StringLength(TextMaxLength, MinimumLength = TextMinLength, ErrorMessage = "Employee Email should be between {2} and {1} symbols!")]
         public string Email { get; init; }
 
         [Display(Name = "Phone Number")]
-        [StringLength(PhoneNumberMaxLength, MinimumLength = PhoneNumberMinLength, ErrorMessage = "Employee Phone Number should be between {2} and {1}!")]
+        [StringLength(PhoneNumberMaxLength, MinimumLength = PhoneNumberMinLength, ErrorMessage = "Employee Phone Number should be between {2} and {1} symbols!")]
         public string PhoneNumber { get; init; }
 
         [Required]

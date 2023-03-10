@@ -1,6 +1,7 @@
 using EmployeeTaskSystem.Data;
 using EmployeeTaskSystem.Infrastructure;
 using EmployeeTaskSystem.Services.Employees;
+using EmployeeTaskSystem.Services.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,7 +21,8 @@ builder.Services
 builder.Services.AddControllersWithViews();
 
 builder.Services
-    .AddTransient<IEmployeeService, EmployeeService>();
+    .AddTransient<IEmployeeService, EmployeeService>()
+    .AddTransient<ITaskService, TaskService>();
 
 var app = builder.Build();
 
