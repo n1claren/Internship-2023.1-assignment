@@ -4,12 +4,14 @@ using static EmployeeTaskSystem.Data.DataConstants;
 
 namespace EmployeeTaskSystem.Models.Tasks
 {
-    public class AddTaskFormModel
+    public class CRUDTaskFormModel
     {
-        public AddTaskFormModel()
+        public CRUDTaskFormModel()
         {
             this.Employees = new List<SelectEmployeeModel>();
         }
+
+        public int Id { get; init; }
 
         [StringLength(TaskTitleMaxLength, MinimumLength = TextMinLength, ErrorMessage = "Task Title should be between {2} and {1} symbols!")]
         public string Title { get; init; }
@@ -23,6 +25,6 @@ namespace EmployeeTaskSystem.Models.Tasks
         [Display(Name = "Due Date")]
         public DateTime DueDate { get; init; }
 
-        public IEnumerable<SelectEmployeeModel> Employees { get; init; }
+        public IEnumerable<SelectEmployeeModel> Employees { get; set; }
     }
 }

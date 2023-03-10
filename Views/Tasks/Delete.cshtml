@@ -1,0 +1,29 @@
+﻿@model CRUDTaskFormModel
+
+<div>
+    <div class="alert alert-danger" role="alert">
+        Are you sure you want to delete this entry?
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div>
+            <div class="card" style="width: 18rem;">
+                <div class="card-header">
+                    Task: @Model.Title
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Task Description: @Model.Description</li>
+                    <li class="list-group-item">Due Date: @Model.DueDate.ToString("dddd, dd MMMM yyyy")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card-body">
+    <form method="post">
+        <input class="btn btn-danger" type="submit" value="Delete" />
+    </form>
+</div>

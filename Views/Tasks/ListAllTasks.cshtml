@@ -23,10 +23,10 @@ else
                     <td scope="col">@task.Title</td>
                     <td scope="col">@task.Description</td>
                     <td scope="col">@task.EmployeeName</td>
-                    <td scope="col">@task.DueDate.ToString("dddd, dd MMMM yyyy")</td>
-                    <td scope="col"><a asp-controller="Taks" asp-action="MarkComplete" asp-route-id="@task.Id" class="btn btn-primary">Complete</a></td>
-                    <td scope="col"><a asp-controller="Taks" asp-action="Edit" asp-route-id="@task.Id" class="btn btn-warning">Edit</a></td>
-                    <td scope="col"><a asp-controller="Taks" asp-action="Delete" asp-route-id="@task.Id" class="btn btn-danger">Delete</a></td>
+                    <td scope="col">@task.DueDate</td>
+                    <td scope="col"><a asp-controller="Tasks" asp-action="MarkComplete" asp-route-id="@task.Id" class="btn btn-primary">Complete</a></td>
+                    <td scope="col"><a asp-controller="Tasks" asp-action="Edit" asp-route-id="@task.Id" class="btn btn-warning">Edit</a></td>
+                    <td scope="col"><a asp-controller="Tasks" asp-action="Delete" asp-route-id="@task.Id" class="btn btn-danger">Delete</a></td>
                 </tr>
             }
         </tbody>

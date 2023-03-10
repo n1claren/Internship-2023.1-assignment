@@ -24,6 +24,40 @@ namespace EmployeeTaskSystem.Services.Tasks
             this.data.SaveChanges();
         }
 
+        public bool DeleteTask(int id)
+        {
+            var task = this.data.Tasks.Where(t => t.Id == id).FirstOrDefault();
+
+            if (task == null)
+            {
+                return false;
+            }
+
+            this.data.Tasks.Remove(task);
+            this.data.SaveChanges();
+
+            return true;
+        }
+
+        public bool EditTask(int id, string title, string description, int employeeId, DateTime dueDate)
+        {
+            var task = this.data.Tasks.Find(id);
+
+            if (task == null)
+            {
+                return false;
+            }
+
+            task.Title = title;
+            task.Description = description;
+            task.EmployeeId = employeeId;
+            task.DueDate = dueDate;
+
+            this.data.SaveChanges();
+
+            return true;
+        }
+
         public IEnumerable<SelectEmployeeModel> GetAllEmployees()
             => this.data
                    .Employees
@@ -33,6 +67,20 @@ namespace EmployeeTaskSystem.Services.Tasks
                        FullName = e.FullName
                    })
                    .ToList();
+
+        public CRUDTaskFormModel getTaskData(int id)
+            => this.data
+                   .Tasks
+                   .Where(t => t.Id == id)
+                   .Select(t => new CRUDTaskFormModel
+                   {
+                       Id = t.Id,
+                       Title = t.Title,
+                       Description = t.Description,
+                       EmployeeId = t.EmployeeId,
+                       DueDate = t.DueDate
+                   })
+                   .First();
 
         public ListTasksViewModel ListAllTasks()
         {
