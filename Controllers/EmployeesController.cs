@@ -48,5 +48,57 @@ namespace EmployeeTaskSystem.Controllers
 
             return View(employee);
         }
+
+        public IActionResult Edit(int id)
+        {
+            var employee = this.eService.GetEmployeeDetails(id);
+
+            return View(new AddEmployeeFormModel
+            {
+                FullName = employee.FullName,
+                Email = employee.Email,
+                PhoneNumber = employee.PhoneNumber,
+                DateOfBirth = employee.DateOfBirth,
+                Salary = employee.Salary
+            });
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int id, AddEmployeeFormModel employee)
+        {
+            var edited = this.eService.EditEmployee(id, 
+                                                    employee.FullName, 
+                                                    employee.Email, 
+                                                    employee.PhoneNumber, 
+                                                    employee.DateOfBirth, 
+                                                    employee.Salary);
+
+            if (!edited)
+            {
+                return BadRequest();
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult Delete(int id)
+        {
+            var employee = this.eService.GetEmployeeDetails(id);
+
+            return View(employee);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(EmployeeDTO employee)
+        {
+            var deleted = this.eService.DeleteEmployee(employee.Id);
+
+            if (!deleted)
+            {
+                return BadRequest();
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

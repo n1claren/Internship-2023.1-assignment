@@ -26,6 +26,41 @@ namespace EmployeeTaskSystem.Services.Employees
             this.data.SaveChanges();
         }
 
+        public bool DeleteEmployee(int id)
+        {
+            var epmloyee = this.data.Employees.Where(v => v.Id == id).FirstOrDefault();
+
+            if (epmloyee == null)
+            {
+                return false;
+            }
+
+            this.data.Employees.Remove(epmloyee);
+            this.data.SaveChanges();
+
+            return true;
+        }
+
+        public bool EditEmployee(int id, string fullName, string email, string phoneNumber, DateTime dateOfBirth, decimal salary)
+        {
+            var employee = this.data.Employees.Find(id);
+
+            if (employee == null)
+            {
+                return false;
+            }
+
+            employee.FullName = fullName;
+            employee.Email = email;
+            employee.PhoneNumber = phoneNumber;
+            employee.DateOfBirth = dateOfBirth;
+            employee.Salary = salary;
+
+            this.data.SaveChanges();
+
+            return true;
+        }
+
         public bool EmployeeExists(string email, string phoneNumber)
         {
             bool emailExists = this.data.Employees.Any(e => e.Email == email);
