@@ -1,0 +1,30 @@
+﻿@if (Model.Employees.Count == 0)
+{
+    <h1 class="display-4">There are no employees in the system.</h1>
+}
+else
+{
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Full Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Date Of Birth</th>
+                <th scope="col">Salary</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var employee in Model.Employees)
+            {
+                <tr>
+                    <td scope="col">@employee.FullName</td>
+                    <td scope="col">@employee.Email</td>
+                    <td scope="col">@employee.PhoneNumber</td>
+                    <td scope="col">@employee.DateOfBirth.ToString("dddd, dd MMMM yyyy")</td>
+                    <td scope="col">@employee.Salary</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

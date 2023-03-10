@@ -1,5 +1,6 @@
 ﻿using EmployeeTaskSystem.Data;
 using EmployeeTaskSystem.Data.Models;
+using EmployeeTaskSystem.Models.Employees;
 
 namespace EmployeeTaskSystem.Services.Employees
 {
@@ -43,6 +44,27 @@ namespace EmployeeTaskSystem.Services.Employees
             {
                 return false;
             }
+        }
+
+        public ListEmployeesViewModel ListEmployees()
+        {
+            var employees = this.data
+                                .Employees
+                                .OrderBy (e => e.Id)
+                                .Select (e => new EmployeeDTO
+                                {
+                                    FullName = e.FullName,
+                                    Email = e.Email,
+                                    PhoneNumber = e.PhoneNumber,
+                                    DateOfBirth = e.DateOfBirth,
+                                    Salary = e.Salary
+                                })
+                                .ToList ();
+
+            return new ListEmployeesViewModel
+            {
+                Employees = employees
+            };
         }
     }
 }

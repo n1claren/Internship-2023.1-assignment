@@ -34,5 +34,12 @@ namespace EmployeeTaskSystem.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        public IActionResult ListEmployees()
+        {
+            var employees = this.eService.ListEmployees();
+
+            return View(employees);
+        }
     }
 }
