@@ -78,7 +78,7 @@ namespace EmployeeTaskSystem.Controllers
                 return BadRequest();
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("ListEmployees", "Employees");
         }
 
         public IActionResult Delete(int id)
@@ -98,7 +98,7 @@ namespace EmployeeTaskSystem.Controllers
                 return BadRequest();
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("ListEmployees", "Employees");
         }
     }
 }

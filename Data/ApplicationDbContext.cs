@@ -15,6 +15,8 @@ namespace EmployeeTaskSystem.Data
 
         public DbSet<Employee> Employees { get; init; }
 
+        public DbSet<CompletedTask> CompletedTasks { get; init; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Models.Task>()

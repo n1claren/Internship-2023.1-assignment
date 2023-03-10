@@ -15,5 +15,9 @@ namespace EmployeeTaskSystem.Services.Tasks
         public CRUDTaskFormModel getTaskData(int id);
 
         public bool DeleteTask(int id);
+
+        public ListCompetedTasksModel ListCompletedTasks();
+
+        public bool CompleteTask(int id);
     }
 }

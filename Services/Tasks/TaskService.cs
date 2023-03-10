@@ -1,4 +1,5 @@
 ﻿using EmployeeTaskSystem.Data;
+using EmployeeTaskSystem.Data.Models;
 using EmployeeTaskSystem.Models.Tasks;
 
 namespace EmployeeTaskSystem.Services.Tasks
@@ -22,6 +23,30 @@ namespace EmployeeTaskSystem.Services.Tasks
 
             this.data.Tasks.Add(task);
             this.data.SaveChanges();
+        }
+
+        public bool CompleteTask(int id)
+        {
+            var task = this.data.Tasks.Where(t => t.Id == id).FirstOrDefault();
+
+            if (task == null)
+            {
+                return false;
+            }
+
+            var completedTask = new CompletedTask
+            {
+                Title = task.Title,
+                EmployeeId = task.EmployeeId,
+                EmployeeName = this.data.Employees.Where(e => e.Id == task.EmployeeId).First().FullName,
+                CompletedOn = DateTime.UtcNow
+            };
+
+            this.data.Tasks.Remove(task);
+            this.data.CompletedTasks.Add(completedTask);
+            this.data.SaveChanges();
+
+            return true;
         }
 
         public bool DeleteTask(int id)
@@ -98,6 +123,26 @@ namespace EmployeeTaskSystem.Services.Tasks
                             .ToList();
 
             return new ListTasksViewModel
+            {
+                Tasks = tasks
+            };
+        }
+
+        public ListCompetedTasksModel ListCompletedTasks()
+        {
+            var tasks = this.data
+                            .CompletedTasks
+                            .OrderBy(t => t.Id)
+                            .Select(t => new CompletedTaskDTO
+                            {
+                                Title = t.Title,
+                                EmployeeId = t.EmployeeId,
+                                EmployeeName = t.EmployeeName,
+                                CompletedOn = t.CompletedOn
+                            })
+                            .ToList();
+
+            return new ListCompetedTasksModel
             {
                 Tasks = tasks
             };

@@ -80,5 +80,24 @@ namespace EmployeeTaskSystem.Controllers
 
             return RedirectToAction("ListAllTasks", "Tasks");
         }
+
+        public IActionResult CompletedTasks()
+        {
+            var completedTasks = this.tService.ListCompletedTasks();
+
+            return View(completedTasks);
+        }
+
+        public IActionResult MarkComplete(int id)
+        {
+            var completed = this.tService.CompleteTask(id);
+
+            if (!completed)
+            {
+                return BadRequest();
+            }
+
+            return RedirectToAction("CompletedTasks", "Tasks");
+        }
     }
 }
