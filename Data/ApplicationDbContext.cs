@@ -23,7 +23,7 @@ namespace EmployeeTaskSystem.Data
                 .HasOne(t => t.Employee)
                 .WithMany(e => e.Tasks)
                 .HasForeignKey(t => t.EmployeeId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             base.OnModelCreating(builder);
         }

@@ -19,5 +19,9 @@ namespace EmployeeTaskSystem.Services.Tasks
         public ListCompetedTasksModel ListCompletedTasks();
 
         public bool CompleteTask(int id);
+
+        public bool DeleteCompletedTask(int id);
+
+        public CompletedTaskDTO getCompletedTaskData(int id);
     }
 }

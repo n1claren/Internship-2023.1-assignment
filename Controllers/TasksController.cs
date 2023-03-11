@@ -2,6 +2,7 @@
 using EmployeeTaskSystem.Models.Tasks;
 using EmployeeTaskSystem.Services.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace EmployeeTaskSystem.Controllers
 {
@@ -93,6 +94,26 @@ namespace EmployeeTaskSystem.Controllers
             var completed = this.tService.CompleteTask(id);
 
             if (!completed)
+            {
+                return BadRequest();
+            }
+
+            return RedirectToAction("CompletedTasks", "Tasks");
+        }
+
+        public IActionResult DeleteCompleted(int id)
+        {
+            var completedTask = this.tService.getCompletedTaskData(id);
+
+            return View(completedTask);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteCompleted(CompletedTaskDTO completedTask) 
+        {
+            var deleted = this.tService.DeleteCompletedTask(completedTask.Id);
+
+            if (!deleted)
             {
                 return BadRequest();
             }

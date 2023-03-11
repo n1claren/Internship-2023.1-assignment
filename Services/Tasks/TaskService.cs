@@ -1,6 +1,7 @@
 ﻿using EmployeeTaskSystem.Data;
 using EmployeeTaskSystem.Data.Models;
 using EmployeeTaskSystem.Models.Tasks;
+using System.Threading.Tasks;
 
 namespace EmployeeTaskSystem.Services.Tasks
 {
@@ -44,6 +45,21 @@ namespace EmployeeTaskSystem.Services.Tasks
 
             this.data.Tasks.Remove(task);
             this.data.CompletedTasks.Add(completedTask);
+            this.data.SaveChanges();
+
+            return true;
+        }
+
+        public bool DeleteCompletedTask(int id)
+        {
+            var task = this.data.CompletedTasks.Where(t => t.Id == id).FirstOrDefault();
+
+            if (task == null)
+            {
+                return false;
+            }
+
+            this.data.CompletedTasks.Remove(task);
             this.data.SaveChanges();
 
             return true;
@@ -107,6 +123,20 @@ namespace EmployeeTaskSystem.Services.Tasks
                    })
                    .First();
 
+        public CompletedTaskDTO getCompletedTaskData(int id)
+            => this.data
+                   .CompletedTasks
+                   .Where(t => t.Id == id)
+                   .Select(t => new  CompletedTaskDTO
+                   {
+                       Id = id,
+                       Title = t.Title,
+                       EmployeeId= t.EmployeeId,
+                       EmployeeName = t.EmployeeName,
+                       CompletedOn = t.CompletedOn
+                   })
+                   .First();
+
         public ListTasksViewModel ListAllTasks()
         {
             var tasks = this.data
@@ -135,6 +165,7 @@ namespace EmployeeTaskSystem.Services.Tasks
                             .OrderBy(t => t.Id)
                             .Select(t => new CompletedTaskDTO
                             {
+                                Id= t.Id,
                                 Title = t.Title,
                                 EmployeeId = t.EmployeeId,
                                 EmployeeName = t.EmployeeName,

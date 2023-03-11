@@ -10,7 +10,7 @@ else
                 <th scope="col">Task Title</th>
                 <th scope="col">Completed by</th>
                 <th scope="col">Completed on</th>
-
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -20,6 +20,7 @@ else
                     <td scope="col">@task.Title</td>
                     <td scope="col">@task.EmployeeName</td>
                     <td scope="col">@task.CompletedOn</td>
+                    <td scope="col"><a asp-controller="Tasks" asp-action="DeleteCompleted" asp-route-id="@task.Id" class="btn btn-danger">Delete</a></td>
                 </tr>
             }
         </tbody>
