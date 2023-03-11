@@ -15,5 +15,7 @@ namespace EmployeeTaskSystem.Services.Employees
         public bool DeleteEmployee(int id);
 
         public bool EditEmployee(int id, string fullName, string email, string phoneNumber, DateTime dateOfBirth, decimal salary);
+
+        public ListTop5EmployeesModel GetTop5Employees();
     }
 }

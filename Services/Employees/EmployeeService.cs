@@ -96,6 +96,46 @@ namespace EmployeeTaskSystem.Services.Employees
             return employee;
         }
 
+        public ListTop5EmployeesModel GetTop5Employees()
+        {
+            var startDate = DateTime.Today.AddMonths(-1);
+
+            var completedTasks = this.data
+                                     .CompletedTasks
+                                     .Where(ct => ct.CompletedOn > startDate)
+                                     .ToList();
+
+            var top5model = new ListTop5EmployeesModel();
+
+            foreach (var task in completedTasks)
+            {
+                if (top5model.EmployeesTasksCompleted.Any(e => e.Id == task.EmployeeId))
+                {
+                    top5model.EmployeesTasksCompleted.Where(e => e.Id == task.EmployeeId).First().TasksCompleted += 1;
+                }
+                else
+                {
+                    var employee = new EmployeeTasksCompletedModel
+                    {
+                        Id = task.EmployeeId,
+                        FullName = task.EmployeeName,
+                        TasksCompleted = 1
+                    };
+
+                    top5model.EmployeesTasksCompleted.Add(employee);
+                }
+            }
+
+
+
+            top5model.EmployeesTasksCompleted = top5model.EmployeesTasksCompleted
+                                                         .OrderByDescending(e => e.TasksCompleted)
+                                                         .Take(5)
+                                                         .ToList();
+
+            return top5model;
+        }
+
         public ListEmployeesViewModel ListEmployees()
         {
             var employees = this.data

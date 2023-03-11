@@ -100,5 +100,12 @@ namespace EmployeeTaskSystem.Controllers
 
             return RedirectToAction("ListEmployees", "Employees");
         }
+
+        public IActionResult ListTop5Employees()
+        {
+            var employees = this.eService.GetTop5Employees();
+
+            return View(employees);
+        }
     }
 }

@@ -1,0 +1,29 @@
+﻿@if (Model.EmployeesTasksCompleted.Count == 0)
+{
+    <h1 class="display-4">There are no tasks completed in the last month.</h1>
+}
+else
+{
+    var count = Model.EmployeesTasksCompleted.Count + 1;
+
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Rank</th>
+                <th scope="col">Employee Name</th>
+                <th scope="col">Tasks Completed</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 1; i < count; i++)
+            //foreach (var task in Model.EmployeesTasksCompleted)
+            {
+                <tr>
+                    <td scope="col">@i</td>
+                    <td scope="col">@Model.EmployeesTasksCompleted[i-1].FullName</td>
+                    <td scope="col">@Model.EmployeesTasksCompleted[i-1].TasksCompleted</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
