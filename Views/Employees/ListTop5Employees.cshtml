@@ -12,6 +12,7 @@ else
                 <th scope="col">Rank</th>
                 <th scope="col">Employee Name</th>
                 <th scope="col">Tasks Completed</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -22,6 +23,7 @@ else
                     <td scope="col">@i</td>
                     <td scope="col">@Model.EmployeesTasksCompleted[i-1].FullName</td>
                     <td scope="col">@Model.EmployeesTasksCompleted[i-1].TasksCompleted</td>
+                    <td scope="col"><a asp-controller="Employees" asp-action="Details" asp-route-id="@Model.EmployeesTasksCompleted[i-1].Id" class="btn btn-primary">Details</a></td>
                 </tr>
             }
         </tbody>

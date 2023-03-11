@@ -1,7 +1,6 @@
 ﻿using EmployeeTaskSystem.Data;
 using EmployeeTaskSystem.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
 
 namespace EmployeeTaskSystem.Infrastructure
 {
@@ -18,11 +17,106 @@ namespace EmployeeTaskSystem.Infrastructure
             data.Database.Migrate();
 
             SeedEmployees(data);
+            SeedTasks(data);
 
             data.SaveChanges();
 
             return app;
         }
+
+        private static void SeedTasks(ApplicationDbContext data)
+        {
+            if (data.Tasks.Any() || data.CompletedTasks.Any())
+            {
+                return;
+            }
+
+            var employees = data.Employees.ToList();
+
+            var random = new Random();
+
+            data.Tasks.AddRange(new[]
+            {
+                new Data.Models.Task
+                {
+                    Title = "Walk the dog.",
+                    Description = "Walk the dog for at least 15 minutes. Make sure it goes to the toilet.",
+                    EmployeeId = employees[random.Next(employees.Count)].Id,
+                    DueDate = DateTime.Now.AddDays(random.Next(20))
+                },
+                new Data.Models.Task
+                {
+                    Title = "Repair the printer.",
+                    Description = "If you are unable to do it call a technician and pay him.",
+                    EmployeeId = employees[random.Next(employees.Count)].Id,
+                    DueDate = DateTime.Now.AddDays(random.Next(20))
+                },
+                new Data.Models.Task
+                {
+                    Title = "Fold the laundry.",
+                    Description = "Separate clothes by color.",
+                    EmployeeId = employees[random.Next(employees.Count)].Id,
+                    DueDate = DateTime.Now.AddDays(random.Next(20))
+                },
+                new Data.Models.Task
+                {
+                    Title = "Feed the cat.",
+                    Description = "Make sure you chance the cat's water too.",
+                    EmployeeId = employees[random.Next(employees.Count)].Id,
+                    DueDate = DateTime.Now.AddDays(random.Next(20))
+                },
+                new Data.Models.Task
+                {
+                    Title = "Go over the contract.",
+                    Description = "Make sure we are not missing anything.",
+                    EmployeeId = employees[random.Next(employees.Count)].Id,
+                    DueDate = DateTime.Now.AddDays(random.Next(20))
+                },
+                new Data.Models.Task
+                {
+                    Title = "Call the client.",
+                    Description = "Go over the details of the contract with the client.",
+                    EmployeeId = employees[random.Next(employees.Count)].Id,
+                    DueDate = DateTime.Now.AddDays(random.Next(20))
+                },
+                new Data.Models.Task
+                {
+                    Title = "Repair the printer.",
+                    Description = "If you are unable to do it call a technician and pay him.",
+                    EmployeeId = employees[random.Next(employees.Count)].Id,
+                    DueDate = DateTime.Now.AddDays(random.Next(20))
+                },
+                new Data.Models.Task
+                {
+                    Title = "Write tests for the controllers in our app.",
+                    Description = "Dont miss edge cases.",
+                    EmployeeId = employees[random.Next(employees.Count)].Id,
+                    DueDate = DateTime.Now.AddDays(random.Next(20))
+                },
+                new Data.Models.Task
+                {
+                    Title = "Move office equipment.",
+                    Description = "Be very careful with those monitors, they are quite expensive.",
+                    EmployeeId = employees[random.Next(employees.Count)].Id,
+                    DueDate = DateTime.Now.AddDays(random.Next(20))
+                },
+                new Data.Models.Task
+                {
+                    Title = "Read the documentation.",
+                    Description = "Read the whole thing trough, dont skip.",
+                    EmployeeId = employees[random.Next(employees.Count)].Id,
+                    DueDate = DateTime.Now.AddDays(random.Next(20))
+                },
+                new Data.Models.Task
+                {
+                    Title = "Mentor the new employee for a day.",
+                    Description = "Settle him in. Answer his questions. Make sure he does his job right.",
+                    EmployeeId = employees[random.Next(employees.Count)].Id,
+                    DueDate = DateTime.Now.AddDays(random.Next(20))
+                },
+            });
+        }
+
 
         private static void SeedEmployees(ApplicationDbContext data)
         {
