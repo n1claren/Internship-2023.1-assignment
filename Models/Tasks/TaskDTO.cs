@@ -10,6 +10,8 @@
 
         public string EmployeeName { get; init; }
 
+        public int EmployeeId { get; init; }
+
         public DateTime DueDate { get; init; }
     }
 }
