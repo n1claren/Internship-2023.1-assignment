@@ -15,7 +15,9 @@ I have not added any aditional functionalies by including a new entity.
 I have added an API.
 
 Head to /api/eployees to get all employee data.
-Head to /api/tasks to get all the data for tasks waiting to be done.
-Head to /api/completedTasks to get all the data for the completed tasks.
-Head to /api/statsCount to get the number of employees / tasks / completedTasks in the database.
 
+Head to /api/tasks to get all the data for tasks waiting to be done.
+
+Head to /api/completedTasks to get all the data for the completed tasks.
+
+Head to /api/statsCount to get the number of employees / tasks / completedTasks in the database.
